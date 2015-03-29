@@ -177,6 +177,20 @@ void MainWindow::on_updateButton_clicked()
     }
 }
 
+/**
+ * @brief MainWindow::on_pushButton_clicked
+ */
+void MainWindow::on_pushButton_clicked()
+{
+    ui->statusBar->showMessage(tr("Pushing to password-store"), 2000);
+    currentAction = GIT;
+    if (usePass) {
+        executePass("git push");
+    } else {
+        executeWrapper(gitExecutable, "push");
+    }
+}
+
 QString MainWindow::getFile(const QModelIndex &index, bool forPass)
 {
     if (!index.isValid() || !model.fileInfo(proxyModel.mapToSource(index)).isFile()) {
